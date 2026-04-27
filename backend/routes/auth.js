@@ -1,5 +1,5 @@
-const express = requrie("express");
-const router = express.router();
+const express = require("express");
+const router = express.Router();
 const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -35,6 +35,7 @@ router.post("/register", async (req, res) => {
 //! GİRİŞ YAPMA (LOGIN)
 router.post("/login", async (req, res) => {
   try {
+   
     const { username, password } = req.body;
 
     //? 1. ADIM: Kullanıcı var mı?
@@ -58,7 +59,7 @@ router.post("/login", async (req, res) => {
 
     //? 4.ADIM: Kartı kullanıcıya teslim et
     res
-      .status()
+      .status(200)
       .json({ token: token, role: user.role, message: "Giriş başarılı" });
   } catch (error) {
     res.status(500).json({
@@ -67,3 +68,5 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
+module.exports = router;

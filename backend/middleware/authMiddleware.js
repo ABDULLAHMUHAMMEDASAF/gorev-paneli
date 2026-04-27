@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
 
   if (!authHeader)
     return res
-      .status()
+      .status(401)
       .json({ error: "Yaka kartı (Token) yok! Giriş yapmalısın" });
 
   //? Token genelde "Bearer <TOKEN>" formatında gelir. Sadece token kısmını alalım.
@@ -20,9 +20,9 @@ const verifyToken = (req, res, next) => {
     req.user = verified;
 
     //? 4. Her şey yolunda, "geçebilirsin" komutu!
-    next();
+    next(); //! Her şey yolunda devam et.
   } catch (error) {
-    res.status().json({ error: "Geçersiz veya süresi dolmuş Token!" });
+    res.status(403).json({ error: "Geçersiz veya süresi dolmuş Token!" });
   }
 };
 
