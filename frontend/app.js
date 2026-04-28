@@ -3,6 +3,9 @@ const userNameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 const loginBtn = document.getElementById("loginBtn");
 const messageArea = document.getElementById("message");
+const loadIcon = document.getElementsByClassName(
+  "material-symbols-outlined",
+)[0];
 
 //! 2: Butona tıklandığında ne olacağını tanımlıyoruz
 loginBtn.addEventListener("click", async () => {
@@ -25,9 +28,10 @@ loginBtn.addEventListener("click", async () => {
     if (response.ok) {
       //! 4. TOKEN'i ÇEKMECEYE SAKLAMA YERİ (En kritik JWT Adımı!)
       //! Sunucunun gönderdiği o uzun token'i tarayıcı hafızasına kitliyoruz.
+      loadIcon.style.visibility = "visible";
+      loadIcon.style.animationPlayState = "running";
       localStorage.setItem("myToken", data.token);
       localStorage.setItem("myRole", data.role);
-      window.location.href = "tasks.html";
       messageArea.style.color = "green";
       messageArea.innerText = "Giriş Başarılı! Yönlendiriliyorsunuz...";
 
@@ -35,7 +39,7 @@ loginBtn.addEventListener("click", async () => {
 
       setTimeout(() => {
         window.location.href = "task.html";
-      }, 1000);
+      }, 3000);
     } else {
       //! Sunucu hata döndürdüyse (Şifre yanlış vb.)
       messageArea.innerText = data.error;

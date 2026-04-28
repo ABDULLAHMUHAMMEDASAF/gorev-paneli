@@ -35,7 +35,6 @@ router.post("/register", async (req, res) => {
 //! GİRİŞ YAPMA (LOGIN)
 router.post("/login", async (req, res) => {
   try {
-   
     const { username, password } = req.body;
 
     //? 1. ADIM: Kullanıcı var mı?
